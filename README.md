@@ -17,7 +17,7 @@ A plumber under a sink cannot answer the phone. The caller does not leave a voic
 3. **Answers only from your facts.** Hours, service area, the service call fee: Claude answers from `BUSINESS_FAQ` and nothing else. A question the facts do not cover (a price for a repair, a diagnosis) goes to a person.
 4. **Offers real open times and books them.** When the customer wants a visit, they get 3 open times from the GoHighLevel calendar. The one they pick is booked, and their opportunity moves from New leads to Booked.
 5. **Treats emergencies as emergencies.** Words such as flooding, burst pipe, no water or gas smell skip the AI chat: the customer gets your emergency text, and Slack gets an alert with a channel mention, their words and a link to the contact. Claude catches emergencies in other words too ("water is pouring through the ceiling"), also during quiet hours.
-6. **Knows when to hand off.** An upset customer, a request for a person, a question it cannot answer, a long conversation or a Claude outage: the customer gets an honest reply, the contact gets a `needs-human` tag and a note, and Slack gets an alert.
+6. **Knows when to hand off.** An upset customer, a request for a person, a question it cannot answer or a Claude outage: the customer gets an honest reply, the contact gets a `needs-human` tag and a note, and Slack gets an alert. A long conversation (the reply cap) is handed off the same way, without another text.
 7. **Respects STOP and quiet hours.** STOP and the other opt out words set SMS DND in code, before any AI. Between `QUIET_HOURS_START` and `QUIET_HOURS_END` the assistant does not text. Claude still reads a message that comes in then: an emergency or an opt out, in any words, is handled at once, and anything else waits and is answered when quiet hours end.
 8. **Records everything in GoHighLevel.** Tags for each outcome, a note for each event (the missed call, why they called, the booking, the hand off, the emergency, the opt out) and the moved opportunity.
 9. **Fails loudly.** Any GoHighLevel, Claude or Slack failure ends the run as failed, and the error workflow posts the reason and a link to the run in Slack.
@@ -123,7 +123,7 @@ In Slack, from the same run (the time zone is a test zone; real alerts show your
 
 ```
 *Booked from a missed call*: Maya Lopez (+13125550101)
-Wed, Oct 28, 9:00 AM (Etc/GMT+2)
+Wed, Oct 28, 9:00 AM (Etc/GMT+3)
 Reason: water heater banging
 https://app.gohighlevel.com/v2/location/loc-northside-1/contacts/detail/c-maya
 ```
